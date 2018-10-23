@@ -15,6 +15,15 @@ defmodule BtcWatcher.Application do
       supervisor(BtcWatcher.Supervisor, [])
     ]
 
+    children =
+      unless Mix.env() == :test do
+        [
+          supervisor(BtcWatcherWeb.Endpoint, []),
+          supervisor(BtcWatcher.Supervisor, []) 
+        ]
+      else
+        [supervisor(BtcWatcherWeb.Endpoint, [])]
+      end
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: BtcWatcher.Supervisor]
