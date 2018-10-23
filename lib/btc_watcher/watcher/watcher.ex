@@ -57,7 +57,7 @@ defmodule BtcWatcher.Watcher do
   end
 
   def send(transaction) do
-    Dispatcher.dispatch(transaction)
+    # Dispatcher.dispatch(transaction)
     transaction
   end
 

@@ -1,7 +1,7 @@
 defmodule BtcWatcher.Dispatcher do
   @base_url ""
 
-  def dispatch(tx) when is_nil(tx) do: nil
+  def dispatch(tx) when is_nil(tx), do: nil
   def dispatch(tx), do: post(tx)
 
   defp post(msg) do
