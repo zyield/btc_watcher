@@ -34,7 +34,7 @@ defmodule BtcWatcher.Watcher do
     {:ok, parent}
   end
 
-  def process_tx(%{"x" => %{"out" => outputs, "inputs" => inputs, "hash" => hash}}) do
+  def process_tx(%{"x" => %{"out" => outputs, "inputs" => inputs, "hash" => hash, "time" => timestamp}}) do
     {_in_value, in_address} = inputs
                             |> Enum.map(fn %{"prev_out" => prev_out} -> prev_out end)
                             |> get_max_value
@@ -51,6 +51,7 @@ defmodule BtcWatcher.Watcher do
         is_btc_tx: true,
         value: out_value,
         token_amount: btc_value,
+        timestamp: timestamp
       }
       |> send
     end
