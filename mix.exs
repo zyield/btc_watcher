@@ -40,7 +40,8 @@ defmodule BtcWatcher.Mixfile do
       {:httpoison, "~> 1.0"},
       {:plug_cowboy, "~> 1.0"},
       {:number, "~> 0.5.6"},
-      {:websockex, "~> 0.4.0"}
+      {:websockex, "~> 0.4.0"},
+      {:distillery, "~> 2.0"}
     ]
   end
 end

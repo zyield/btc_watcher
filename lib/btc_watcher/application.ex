@@ -16,7 +16,7 @@ defmodule BtcWatcher.Application do
     ]
 
     children =
-      unless Mix.env() == :test do
+      if watcher_enabled? do
         [
           supervisor(BtcWatcherWeb.Endpoint, []),
           supervisor(BtcWatcher.Supervisor, []) 
@@ -36,4 +36,12 @@ defmodule BtcWatcher.Application do
     BtcWatcherWeb.Endpoint.config_change(changed, removed)
     :ok
   end
+
+  defp watcher_enabled? do
+    Application.get_env(:btc_watcher, :enable_watcher) |> is_true?
+  end
+
+  defp is_true?("true"), do: true
+  defp is_true?(true), do: true
+  defp is_true?(_), do: false
 end
