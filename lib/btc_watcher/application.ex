@@ -19,7 +19,7 @@ defmodule BtcWatcher.Application do
       unless Mix.env() == :test do
         [
           supervisor(BtcWatcherWeb.Endpoint, []),
-          supervisor(BtcWatcher.Supervisor, []) 
+          supervisor(BtcWatcher.Supervisor, [])
         ]
       else
         [supervisor(BtcWatcherWeb.Endpoint, [])]
