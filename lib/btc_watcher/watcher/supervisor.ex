@@ -20,7 +20,7 @@ defmodule BtcWatcher.Supervisor do
   end
 
   def handle_info({:DOWN, _, :process, pid, _}, state = %{watchers: watchers}) do
-    # Sentry.capture_message("WebSocket Watcher is down", extra: %{state: state})
+    Sentry.capture_message("BTC Watcher is down", extra: %{state: state})
 
     watcher = watchers |> Map.get(pid)
     {:ok, new_watcher_pid} = watcher |> connect_websocket(state)

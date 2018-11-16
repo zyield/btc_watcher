@@ -19,7 +19,7 @@ defmodule BtcWatcher.Mixfile do
   def application do
     [
       mod: {BtcWatcher.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:sentry, :logger, :runtime_tools]
     ]
   end
 
@@ -41,7 +41,8 @@ defmodule BtcWatcher.Mixfile do
       {:plug_cowboy, "~> 1.0"},
       {:number, "~> 0.5.6"},
       {:websockex, "~> 0.4.0"},
-      {:distillery, "~> 2.0"}
+      {:distillery, "~> 2.0"},
+      {:sentry, "~> 6.4"}
     ]
   end
 end
