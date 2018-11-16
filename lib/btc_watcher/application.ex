@@ -6,17 +6,8 @@ defmodule BtcWatcher.Application do
   def start(_type, _args) do
     import Supervisor.Spec
 
-    # Define workers and child supervisors to be supervised
-    children = [
-      # Start the endpoint when the application starts
-      supervisor(BtcWatcherWeb.Endpoint, []),
-      # Start your own worker by calling: BtcWatcher.Worker.start_link(arg1, arg2, arg3)
-      # worker(BtcWatcher.Worker, [arg1, arg2, arg3]),
-      supervisor(BtcWatcher.Supervisor, [])
-    ]
-
     children =
-      if watcher_enabled? do
+      if watcher_enabled?() do
         [
           supervisor(BtcWatcherWeb.Endpoint, []),
           supervisor(BtcWatcher.Supervisor, [])
@@ -38,7 +29,8 @@ defmodule BtcWatcher.Application do
   end
 
   defp watcher_enabled? do
-    Application.get_env(:btc_watcher, :enable_watcher) |> is_true?
+    Application.get_env(:btc_watcher, :enable_watcher)
+    |> is_true?
   end
 
   defp is_true?("true"), do: true
