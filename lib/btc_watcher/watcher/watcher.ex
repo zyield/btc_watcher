@@ -4,6 +4,8 @@ defmodule BtcWatcher.Watcher do
   require Logger
 
   alias BtcWatcher.Dispatcher
+  alias BtcWatcher.PanicMonitor
+
   @btc_ws_url Application.get_env(:btc_watcher, :btc_ws_url)
   @btc_sub  %{op: "unconfirmed_sub"}
   @btc_threshold 50
@@ -59,6 +61,7 @@ defmodule BtcWatcher.Watcher do
 
   def send(transaction) do
     Dispatcher.dispatch(transaction)
+    PanicMonitor.update_time(transaction)
     transaction
   end
 
