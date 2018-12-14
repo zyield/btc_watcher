@@ -6,12 +6,15 @@ defmodule BtcWatcher.Watcher do
   alias BtcWatcher.Dispatcher
   alias BtcWatcher.PanicMonitor
 
-  @btc_ws_url Application.get_env(:btc_watcher, :btc_ws_url)
   @btc_sub  %{op: "unconfirmed_sub"}
   @btc_threshold 50
 
+  def btc_ws_url do
+    Application.get_env(:btc_watcher, :btc_ws_url)
+  end
+
   def start_link(parent) do
-    WebSockex.start_link(@btc_ws_url, __MODULE__, parent)
+    WebSockex.start_link(btc_ws_url(), __MODULE__, parent)
   end
 
   def subscribe(pid) do

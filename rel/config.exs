@@ -39,6 +39,29 @@ environment :prod do
   set include_src: false
   set cookie: :"Eufa0U%YqHeYV8|BImg4IbY?p3MVN9*s;cM1%mi{4y`G}X%3(p]%dMOGuR=hn]E,"
   set vm_args: "rel/vm.args"
+
+  set config_providers: [
+    {Mix.Releases.Config.Providers.Elixir, ["${RELEASE_ROOT_DIR}/etc/config.exs"]}
+  ]
+
+  set overlays: [
+    {:copy, "rel/config/config.exs", "etc/config.exs"}
+  ]
+end
+
+environment :staging do
+  set include_erts: true
+  set include_src: false
+  set cookie: :"Eufa0U%YqHeYV8|BImg4IbY?p3MVN9*s;cM1%mi{4y`G}X%3(p]%dMOGuR=hn]E,"
+  set vm_args: "rel/vm.args"
+
+  set config_providers: [
+    {Mix.Releases.Config.Providers.Elixir, ["${RELEASE_ROOT_DIR}/etc/config.exs"]}
+  ]
+
+  set overlays: [
+    {:copy, "rel/config/config.exs", "etc/config.exs"}
+  ]
 end
 
 # You may define one or more releases in this file.
