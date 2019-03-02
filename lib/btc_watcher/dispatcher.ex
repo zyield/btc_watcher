@@ -11,7 +11,7 @@ defmodule BtcWatcher.Dispatcher do
   end
 
   defp post(msg) do
-    headers = [{"Content-Type", "application/vnd.api+json"}, {"Chainspark-secret", "123"}]
+    headers = [{"Content-Type", "application/vnd.api+json"}]
 
     with {:ok, payload} <- Poison.encode(msg),
          {:ok, _} <- HTTPoison.post(base_url(), payload, headers)
